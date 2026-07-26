@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
-      replyTo: email,
+      reply_to: email,
       subject: `New project inquiry — ${projectType || 'General'} — ${name}`,
       html: `
         <div style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#0A0A0A">

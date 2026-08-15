@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { values, team, quickStats } from '@/lib/data';
+import { values, howWeWork, quickStats } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'About Nozentic — Our Story & Team',
+  title: 'About Nozentic — Our Story & How We Work',
   description:
     'Nozentic is a global software studio founded in 2026, built by engineers and designers who ship accountable, craft-led software.',
   alternates: { canonical: '/about' },
@@ -38,15 +38,13 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-[1360px] px-5 py-16 sm:px-8 sm:py-20 md:py-24">
-        <h2 className="mb-8 text-3xl font-bold tracking-tight sm:mb-11 sm:text-4xl">Leadership</h2>
+        <h2 className="mb-8 text-3xl font-bold tracking-tight sm:mb-11 sm:text-4xl">How we work</h2>
         <div className="grid gap-px border-2 border-ink bg-ink dark:border-paper dark:bg-paper sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((p) => (
-            <div key={p.initials} className="bg-paper px-[22px] py-7 dark:bg-ink">
-              <div className="mb-[18px] flex h-14 w-14 items-center justify-center bg-lime text-lg font-bold text-ink">
-                {p.initials}
-              </div>
-              <div className="text-base font-bold">{p.name}</div>
-              <div className="mt-1 font-mono text-[11.5px] text-ink/55 dark:text-paper/55">{p.role}</div>
+          {howWeWork.map((w) => (
+            <div key={w.index} className="bg-paper px-[22px] py-7 dark:bg-ink">
+              <div className="mb-3.5 font-mono text-xs text-ink/55 dark:text-paper/55">{w.index}</div>
+              <div className="text-base font-bold">{w.title}</div>
+              <p className="mt-2 text-sm leading-relaxed text-ink/60 dark:text-paper/60">{w.desc}</p>
             </div>
           ))}
         </div>

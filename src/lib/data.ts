@@ -3,7 +3,7 @@ export interface ServiceDetail { index: string; title: string; desc: string; fea
 export interface Stat { value: string; label: string; }
 export interface FitProfile { index: string; title: string; desc: string; }
 export interface Value { index: string; title: string; desc: string; }
-export interface TeamMember { initials: string; name: string; role: string; }
+export interface WorkPrinciple { index: string; title: string; desc: string; }
 export interface StartupTier { tag: string; name: string; timeline: string; highlight: boolean; features: string[]; }
 export interface SprintStep { index: string; title: string; desc: string; }
 export interface SocialLink { label: string; href: string; icon: 'linkedin' | 'x' | 'github' | 'facebook' | 'instagram'; }
@@ -64,11 +64,11 @@ export const values: Value[] = [
   { index: '04', title: 'Own the outcome', desc: 'One team accountable from spec to production.' },
 ];
 
-export const team: TeamMember[] = [
-  { initials: 'RK', name: 'Rhea Kapoor', role: 'Co-Founder, Design' },
-  { initials: 'DM', name: 'Daniel Moss', role: 'Co-Founder, Engineering' },
-  { initials: 'TA', name: 'Tomas Alvez', role: 'Head of Software' },
-  { initials: 'SN', name: 'Sana Ndiaye', role: 'Head of Managed Services' },
+export const howWeWork: WorkPrinciple[] = [
+  { index: '01', title: 'One dedicated pod', desc: 'A single team of designers and engineers assigned to your project from day one — not rotating contractors.' },
+  { index: '02', title: 'Direct access', desc: 'You talk to the people actually building your product. No account managers relaying messages.' },
+  { index: '03', title: 'Weekly shipping', desc: 'You see working software every week, not slide decks or status reports.' },
+  { index: '04', title: 'Async-first, global', desc: 'Distributed across time zones so your project keeps moving whether you’re awake or asleep.' },
 ];
 
 export const startupTiers: StartupTier[] = [

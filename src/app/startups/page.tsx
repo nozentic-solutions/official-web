@@ -25,35 +25,39 @@ export default function StartupsPage() {
         </div>
       </section>
 
-      <section className="grid border-t-2 border-ink dark:border-paper sm:grid-cols-3">
-        {startupTiers.map((tier) => (
-          <div
-            key={tier.name}
-            className={`flex flex-col border-b-2 border-r-2 border-ink px-6 py-9 dark:border-paper sm:px-8 sm:py-11 ${
-              tier.highlight ? 'bg-lime text-ink' : ''
-            }`}
-          >
-            <div className="mb-3.5 font-mono text-xs font-bold tracking-wide">{tier.tag}</div>
-            <h3 className="mb-2 text-2xl font-bold">{tier.name}</h3>
-            <div className="mb-[22px] text-[15px] opacity-75">{tier.timeline}</div>
-            <div className="flex-1">
-              {tier.features.map((f) => (
-                <div key={f} className="flex gap-2.5 border-t border-current/20 py-2.5 text-sm">
-                  <span>—</span>
-                  {f}
+      <section className="border-t-2 border-ink dark:border-paper">
+        <div className="mx-auto max-w-[1360px] px-5 sm:px-8">
+          <div className="grid border-l-2 border-ink dark:border-paper sm:grid-cols-3">
+            {startupTiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`flex flex-col border-b-2 border-r-2 border-ink px-6 py-9 dark:border-paper sm:px-8 sm:py-11 ${
+                  tier.highlight ? 'bg-lime text-ink' : ''
+                }`}
+              >
+                <div className="mb-3.5 font-mono text-xs font-bold tracking-wide">{tier.tag}</div>
+                <h3 className="mb-2 text-2xl font-bold">{tier.name}</h3>
+                <div className="mb-[22px] text-[15px] opacity-75">{tier.timeline}</div>
+                <div className="flex-1">
+                  {tier.features.map((f) => (
+                    <div key={f} className="flex gap-2.5 border-t border-current/20 py-2.5 text-sm">
+                      <span>—</span>
+                      {f}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <Link
-              href="/contact"
-              className={`mt-6 inline-block px-5 py-3.5 text-center font-mono text-sm font-bold ${
-                tier.highlight ? 'bg-ink text-paper' : 'bg-ink text-paper dark:bg-paper dark:text-ink'
-              }`}
-            >
-              GET STARTED →
-            </Link>
+                <Link
+                  href="/contact"
+                  className={`mt-6 inline-block px-5 py-3.5 text-center font-mono text-sm font-bold ${
+                    tier.highlight ? 'bg-ink text-paper' : 'bg-ink text-paper dark:bg-paper dark:text-ink'
+                  }`}
+                >
+                  GET STARTED →
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
 
       <section className="mx-auto max-w-[1360px] px-5 py-16 sm:px-8 sm:py-20 md:py-24">

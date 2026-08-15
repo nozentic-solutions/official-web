@@ -1,18 +1,34 @@
-export interface Service { index: string; title: string; desc: string; }
+export interface Service { index: string; title: string; desc: string; icon: 'web' | 'software' | 'apps' | 'msp'; }
 export interface ServiceDetail { index: string; title: string; desc: string; features: string[]; }
 export interface Stat { value: string; label: string; }
-export interface Region { name: string; x: number; y: number; }
-export interface Testimonial { quote: string; name: string; role: string; }
+export interface FitProfile { index: string; title: string; desc: string; }
 export interface Value { index: string; title: string; desc: string; }
 export interface TeamMember { initials: string; name: string; role: string; }
 export interface StartupTier { tag: string; name: string; timeline: string; highlight: boolean; features: string[]; }
 export interface SprintStep { index: string; title: string; desc: string; }
+export interface SocialLink { label: string; href: string; icon: 'linkedin' | 'x' | 'github' | 'facebook' | 'instagram'; }
+
+export const contactInfo = {
+  email: 'info@nozentic.com',
+  phoneDisplay: '+94 70 303 9303',
+  phoneTel: '+94703039303',
+  whatsappHref: 'https://wa.me/94703039303',
+};
+
+// Placeholder hrefs — swap in the real profile URLs when available.
+export const socialLinks: SocialLink[] = [
+  { label: 'LinkedIn', href: '#', icon: 'linkedin' },
+  { label: 'X', href: '#', icon: 'x' },
+  { label: 'Facebook', href: '#', icon: 'facebook' },
+  { label: 'Instagram', href: '#', icon: 'instagram' },
+  { label: 'GitHub', href: '#', icon: 'github' },
+];
 
 export const services: Service[] = [
-  { index: '01', title: 'Web Design', desc: 'Marketing sites and web apps designed with real conversion and brand craft.' },
-  { index: '02', title: 'Custom Software', desc: 'Bespoke platforms and internal tools built to your exact workflow.' },
-  { index: '03', title: 'App Development', desc: 'Native and cross-platform mobile apps, shipped to the App Store and Play Store.' },
-  { index: '04', title: 'Managed IT / MSP', desc: 'Round-the-clock infrastructure, security and support so you never firefight alone.' },
+  { index: '01', title: 'Web Design', desc: 'Marketing sites and web apps designed with real conversion and brand craft.', icon: 'web' },
+  { index: '02', title: 'Custom Software', desc: 'Bespoke platforms and internal tools built to your exact workflow.', icon: 'software' },
+  { index: '03', title: 'App Development', desc: 'Native and cross-platform mobile apps, shipped to the App Store and Play Store.', icon: 'apps' },
+  { index: '04', title: 'Managed IT / MSP', desc: 'Round-the-clock infrastructure, security and support so you never firefight alone.', icon: 'msp' },
 ];
 
 export const servicesDetailed: ServiceDetail[] = [
@@ -35,18 +51,10 @@ export const reachStats: Stat[] = [
   { value: '<1hr', label: 'AVG. FIRST RESPONSE' },
 ];
 
-export const regions: Region[] = [
-  { name: 'New York', x: 22, y: 38 },
-  { name: 'London', x: 46, y: 26 },
-  { name: 'Berlin', x: 52, y: 30 },
-  { name: 'Singapore', x: 78, y: 62 },
-  { name: 'São Paulo', x: 32, y: 78 },
-];
-
-export const testimonials: Testimonial[] = [
-  { quote: 'Nozentic shipped our MVP in five weeks and it hasn\u2019t needed a rewrite since.', name: 'Aria Kessler', role: 'Founder, Ledgerly' },
-  { quote: 'They think like product owners, not contractors. That changed everything.', name: 'Marcus Oyelaran', role: 'CTO, Orbital Health' },
-  { quote: 'Our infrastructure has been rock solid since Nozentic took it over.', name: 'Priya Nathan', role: 'COO, Vantify' },
+export const idealFor: FitProfile[] = [
+  { index: '01', title: 'Early-stage startups', desc: 'You need a working MVP live in weeks to test the market or close your next round \u2014 not a six-month build.' },
+  { index: '02', title: 'Growing product teams', desc: 'You have real users and a roadmap, but need extra design and engineering capacity to ship faster.' },
+  { index: '03', title: 'Teams without in-house IT', desc: 'You want reliable infrastructure, security and support running in the background, without building an ops team.' },
 ];
 
 export const values: Value[] = [

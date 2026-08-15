@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useTheme } from '@/components/ThemeProvider';
+import { NozenticMark } from '@/components/NozenticMark';
 
 const NAV = [
   { href: '/', label: 'HOME' },
@@ -21,8 +22,14 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b-2 border-ink bg-paper transition-colors duration-300 dark:border-paper dark:bg-ink">
       <div className="mx-auto flex max-w-[1360px] items-center justify-between px-5 py-[18px] sm:px-8">
-        <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2 text-[22px] font-bold tracking-tight">
-          <span className="bg-ink px-2.5 py-1.5 text-paper dark:bg-paper dark:text-ink">NOZENTIC</span>
+        <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2.5">
+          <NozenticMark color="currentColor" size={38} className="shrink-0" />
+          <span className="flex flex-col leading-none">
+            <span className="text-[19px] font-bold tracking-tight sm:text-[22px]">NOZENTIC</span>
+            <span className="font-mono text-[8px] font-bold tracking-[0.22em] text-ink/50 dark:text-paper/50 sm:text-[9px]">
+              SOLUTIONS
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center font-mono text-[12.5px] font-bold tracking-wide md:flex">

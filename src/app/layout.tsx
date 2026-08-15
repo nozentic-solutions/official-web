@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 const grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <main>{children}</main>
           <Footer />
+          <WhatsAppFloat />
         </ThemeProvider>
       </body>
     </html>

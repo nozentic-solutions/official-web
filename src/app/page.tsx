@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { quickStats, services, reachStats, regions, testimonials } from '@/lib/data';
+import { quickStats, services, reachStats, idealFor } from '@/lib/data';
+import { worldMapPins, worldMapSvg, worldMapRatio } from '@/lib/worldmap';
+import { WebDesignIcon, CustomSoftwareIcon, AppDevelopmentIcon, ManagedItIcon } from '@/components/ServiceIcons';
+
+const SERVICE_ICONS = { web: WebDesignIcon, software: CustomSoftwareIcon, apps: AppDevelopmentIcon, msp: ManagedItIcon };
 
 export const metadata: Metadata = {
   title: 'Nozentic — Global Software Studio',
@@ -83,23 +87,28 @@ export default function HomePage() {
               ALL SERVICES →
             </Link>
           </div>
-        </div>
-        <div className="grid border-t-2 border-ink dark:border-paper sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((svc) => (
-            <Link
-              key={svc.index}
-              href="/services"
-              className="flex min-h-[260px] flex-col justify-between border-b-2 border-r-2 border-ink px-6 py-8 dark:border-paper sm:px-9 sm:py-10"
-            >
-              <div>
-                <div className="mb-4 font-mono text-xs font-bold text-ink/55 dark:text-paper/55">{svc.index}</div>
-                <div className="mb-5 h-10 w-10 bg-lime" />
-                <h3 className="mb-2.5 text-xl font-bold tracking-tight">{svc.title}</h3>
-                <p className="text-sm leading-relaxed text-ink/60 dark:text-paper/60">{svc.desc}</p>
-              </div>
-              <div className="mt-5 font-mono text-xs font-bold">EXPLORE →</div>
-            </Link>
-          ))}
+          <div className="grid border-l-2 border-t-2 border-ink dark:border-paper sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((svc) => {
+              const Icon = SERVICE_ICONS[svc.icon];
+              return (
+                <Link
+                  key={svc.index}
+                  href="/services"
+                  className="flex min-h-[260px] flex-col justify-between border-b-2 border-r-2 border-ink px-6 py-8 dark:border-paper sm:px-9 sm:py-10"
+                >
+                  <div>
+                    <div className="mb-4 font-mono text-xs font-bold text-ink/55 dark:text-paper/55">{svc.index}</div>
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center bg-lime">
+                      <Icon className="h-6 w-6 text-ink" />
+                    </div>
+                    <h3 className="mb-2.5 text-xl font-bold tracking-tight">{svc.title}</h3>
+                    <p className="text-sm leading-relaxed text-ink/60 dark:text-paper/60">{svc.desc}</p>
+                  </div>
+                  <div className="mt-5 font-mono text-xs font-bold">EXPLORE →</div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -111,7 +120,7 @@ export default function HomePage() {
             <h2 className="mb-5 text-3xl font-bold tracking-tight sm:text-4xl md:text-[44px]">One team. Every timezone.</h2>
             <p className="mb-7 max-w-[480px] text-[16px] leading-relaxed text-paper/70">
               We run distributed delivery pods so clients get overlapping working hours no matter where they&apos;re
-              based — from São Paulo to Singapore.
+              based — from Colombo to New York.
             </p>
             <div className="grid grid-cols-3 gap-5">
               {reachStats.map((r) => (
@@ -122,35 +131,39 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="relative min-h-[280px] min-w-[280px] flex-1 basis-[380px] border-2 border-paper/20">
+          <div className="relative min-w-[280px] flex-1 basis-[380px] self-center border-2 border-paper/20 bg-[#050505]">
             <div
-              className="absolute inset-0"
-              style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px)', backgroundSize: '26px 26px' }}
+              className="[&_svg]:block [&_svg]:h-full [&_svg]:w-full"
+              style={{ aspectRatio: worldMapRatio }}
+              dangerouslySetInnerHTML={{ __html: worldMapSvg }}
             />
-            {regions.map((reg) => (
+            {worldMapPins.map((pin) => (
               <div
-                key={reg.name}
+                key={pin.name}
                 className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
-                style={{ left: `${reg.x}%`, top: `${reg.y}%` }}
+                style={{ left: `${pin.xPct}%`, top: `${pin.yPct}%` }}
               >
-                <div className="h-2.5 w-2.5 rounded-full bg-lime shadow-[0_0_12px_#C6FF00]" />
-                <div className="whitespace-nowrap font-mono text-[10.5px] text-paper/80">{reg.name}</div>
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime/70" />
+                  <span className="relative h-2.5 w-2.5 rounded-full bg-lime shadow-[0_0_12px_#C6FF00]" />
+                </span>
+                <div className="whitespace-nowrap font-mono text-[10.5px] text-paper/80">{pin.name}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* WHO WE RECOMMEND US FOR */}
       <section className="mx-auto max-w-[1360px] px-5 py-16 sm:px-8 sm:py-20 md:py-24">
-        <h2 className="mb-8 text-3xl font-bold tracking-tight sm:mb-12 sm:text-4xl md:text-[44px]">What clients say</h2>
+        <h2 className="mb-8 text-3xl font-bold tracking-tight sm:mb-12 sm:text-4xl md:text-[44px]">Who we recommend us for</h2>
         <div className="grid gap-px border-2 border-ink bg-ink dark:border-paper dark:bg-paper sm:grid-cols-3">
-          {testimonials.map((tm) => (
-            <div key={tm.name} className="flex min-h-[220px] flex-col justify-between bg-paper p-7 dark:bg-ink sm:p-8">
-              <p className="mb-6 text-[16px] leading-relaxed">&ldquo;{tm.quote}&rdquo;</p>
+          {idealFor.map((f) => (
+            <div key={f.index} className="flex min-h-[220px] flex-col justify-between bg-paper p-7 dark:bg-ink sm:p-8">
               <div>
-                <div className="text-[14.5px] font-bold">{tm.name}</div>
-                <div className="mt-1 font-mono text-[11.5px] text-ink/55 dark:text-paper/55">{tm.role}</div>
+                <div className="mb-4 font-mono text-xs font-bold text-ink/55 dark:text-paper/55">{f.index}</div>
+                <h3 className="mb-2.5 text-xl font-bold tracking-tight">{f.title}</h3>
+                <p className="text-sm leading-relaxed text-ink/60 dark:text-paper/60">{f.desc}</p>
               </div>
             </div>
           ))}

@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
 import ContactForm from '@/components/ContactForm';
+import { LinkedInIcon, XIcon, GitHubIcon, FacebookIcon, InstagramIcon } from '@/components/SocialIcons';
+import { contactInfo, socialLinks } from '@/lib/data';
+
+const ICONS = { linkedin: LinkedInIcon, x: XIcon, github: GitHubIcon, facebook: FacebookIcon, instagram: InstagramIcon };
 
 export const metadata: Metadata = {
   title: 'Contact Nozentic — Start a Project',
@@ -23,11 +27,15 @@ export default function ContactPage() {
         <div className="flex min-w-[240px] flex-1 basis-[280px] flex-col gap-7 bg-ink p-7 text-paper sm:p-10">
           <div>
             <div className="mb-2 font-mono text-[11px] tracking-wide text-lime">EMAIL US</div>
-            <div className="text-lg font-bold">info@nozentic.com</div>
+            <a href={`mailto:${contactInfo.email}`} className="text-lg font-bold">
+              {contactInfo.email}
+            </a>
           </div>
           <div>
             <div className="mb-2 font-mono text-[11px] tracking-wide text-lime">CALL US</div>
-            <div className="text-lg font-bold">+94 76 123 4567</div>
+            <a href={`tel:${contactInfo.phoneTel}`} className="text-lg font-bold">
+              {contactInfo.phoneDisplay}
+            </a>
           </div>
           <div>
             <div className="mb-2 font-mono text-[11px] tracking-wide text-lime">RESPONSE TIME</div>
@@ -37,8 +45,22 @@ export default function ContactPage() {
             <div className="mb-2 font-mono text-[11px] tracking-wide text-lime">STATUS</div>
             <div className="text-[15px] opacity-85">Currently booking Q4 2026 projects</div>
           </div>
-          <div className="mt-auto flex gap-4 font-mono text-[12.5px] font-bold">
-            <span>LINKEDIN</span><span>X</span><span>GITHUB</span>
+          <div className="mt-auto flex flex-wrap gap-4">
+            {socialLinks.map((s) => {
+              const Icon = ICONS[s.icon];
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-paper/90 hover:text-lime"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

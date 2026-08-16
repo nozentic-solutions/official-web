@@ -3,14 +3,20 @@ import Link from 'next/link';
 import { quickStats, services, reachStats, idealFor } from '@/lib/data';
 import { worldMapPins, worldMapSvg, worldMapRatio } from '@/lib/worldmap';
 import { WebDesignIcon, CustomSoftwareIcon, AppDevelopmentIcon, ManagedItIcon } from '@/components/ServiceIcons';
+import { pageOpenGraph, pageTwitter } from '@/lib/seo';
 
 const SERVICE_ICONS = { web: WebDesignIcon, software: CustomSoftwareIcon, apps: AppDevelopmentIcon, msp: ManagedItIcon };
 
+const TITLE = 'Nozentic — Web Design, Custom Software & App Development';
+const DESCRIPTION =
+  'Web design, custom software, app development and managed IT services for teams across 30+ countries. Founded 2026.';
+
 export const metadata: Metadata = {
-  title: 'Nozentic — Global Software Studio',
-  description:
-    'Web design, custom software, app development and managed IT services for teams across 30+ countries. Founded 2026.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/' },
+  openGraph: pageOpenGraph(TITLE, DESCRIPTION, '/'),
+  twitter: pageTwitter(TITLE, DESCRIPTION),
 };
 
 export default function HomePage() {

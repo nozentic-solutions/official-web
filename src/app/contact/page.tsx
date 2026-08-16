@@ -2,13 +2,19 @@ import type { Metadata } from 'next';
 import ContactForm from '@/components/ContactForm';
 import { LinkedInIcon, XIcon, GitHubIcon, FacebookIcon, InstagramIcon } from '@/components/SocialIcons';
 import { contactInfo, socialLinks } from '@/lib/data';
+import { pageOpenGraph, pageTwitter } from '@/lib/seo';
 
 const ICONS = { linkedin: LinkedInIcon, x: XIcon, github: GitHubIcon, facebook: FacebookIcon, instagram: InstagramIcon };
 
+const TITLE = 'Contact Us — Start a Project';
+const DESCRIPTION =
+  'Get in touch with Nozentic. Email info@nozentic.com or send us your project details and we’ll reply within one business day.';
+
 export const metadata: Metadata = {
-  title: 'Contact Nozentic — Start a Project',
-  description:
-    'Get in touch with Nozentic. Email info@nozentic.com or send us your project details and we\u2019ll reply within one business day.',
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: pageOpenGraph(TITLE, DESCRIPTION, '/contact'),
+  twitter: pageTwitter(TITLE, DESCRIPTION),
   alternates: { canonical: '/contact' },
 };
 

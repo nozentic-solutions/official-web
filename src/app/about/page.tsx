@@ -1,11 +1,17 @@
 import type { Metadata } from 'next';
 import { values, howWeWork, quickStats } from '@/lib/data';
+import { pageOpenGraph, pageTwitter } from '@/lib/seo';
+
+const TITLE = 'Our Story & How We Work';
+const DESCRIPTION =
+  'Nozentic is a global software studio founded in 2026, built by engineers and designers who ship accountable, craft-led software.';
 
 export const metadata: Metadata = {
-  title: 'About Nozentic — Our Story & How We Work',
-  description:
-    'Nozentic is a global software studio founded in 2026, built by engineers and designers who ship accountable, craft-led software.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/about' },
+  openGraph: pageOpenGraph(TITLE, DESCRIPTION, '/about'),
+  twitter: pageTwitter(TITLE, DESCRIPTION),
 };
 
 export default function AboutPage() {

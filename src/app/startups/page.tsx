@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { startupTiers, sprintSteps } from '@/lib/data';
+import { pageOpenGraph, pageTwitter } from '@/lib/seo';
+
+const TITLE = 'MVP Sprints & Startup Packages';
+const DESCRIPTION =
+  'Fixed-scope MVP sprints for early-stage teams. Launch a working product in weeks with Nozentic\u2019s startup packages.';
 
 export const metadata: Metadata = {
-  title: 'For Startups — MVP Sprints & Startup Packages',
-  description:
-    'Fixed-scope MVP sprints for early-stage teams. Launch a working product in weeks with Nozentic\u2019s startup packages.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/startups' },
+  openGraph: pageOpenGraph(TITLE, DESCRIPTION, '/startups'),
+  twitter: pageTwitter(TITLE, DESCRIPTION),
 };
 
 export default function StartupsPage() {

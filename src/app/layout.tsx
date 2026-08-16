@@ -1,10 +1,12 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import { contactInfo, socialLinks } from '@/lib/data';
+import { siteUrl, pageOpenGraph, pageTwitter } from '@/lib/seo';
 
 const grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -19,11 +21,25 @@ const mono = Space_Mono({
   display: 'swap',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nozentic.com';
+const SITE_TITLE = 'Nozentic — Web Design, Custom Software & App Development';
+const SITE_DESCRIPTION = 'Web design, custom software, app development and managed IT for teams across 30+ countries.';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FAFAF7' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: 'Nozentic — Global Software Studio', template: '%s | Nozentic' },
+  title: {
+    default: SITE_TITLE,
+    template: '%s | Nozentic',
+  },
   description:
     'Nozentic is a global software studio designing and engineering web platforms, custom software, mobile apps and managed IT infrastructure for ambitious teams.',
   keywords: [
@@ -36,34 +52,52 @@ export const metadata: Metadata = {
     'Sri Lanka software company',
     'Nozentic',
   ],
-  authors: [{ name: 'Nozentic' }],
-  openGraph: {
-    type: 'website',
-    url: siteUrl,
-    siteName: 'Nozentic',
-    title: 'Nozentic — Global Software Studio',
-    description: 'Web design, custom software, app development and managed IT for teams across 30+ countries.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Nozentic' }],
+  authors: [{ name: 'Nozentic Solutions' }],
+  creator: 'Nozentic Solutions',
+  publisher: 'Nozentic Solutions',
+  openGraph: pageOpenGraph(SITE_TITLE, SITE_DESCRIPTION, '/'),
+  twitter: pageTwitter(SITE_TITLE, SITE_DESCRIPTION),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Nozentic — Global Software Studio',
-    description: 'Web design, custom software, app development and managed IT for teams across 30+ countries.',
-    images: ['/og-image.png'],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
-  icons: { icon: '/favicon.ico' },
-  robots: { index: true, follow: true },
 };
+
+const realSocialLinks = socialLinks.filter((s) => s.href !== '#').map((s) => s.href);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Nozentic',
+  name: 'Nozentic Solutions',
+  alternateName: 'Nozentic',
   url: siteUrl,
-  email: 'info@nozentic.com',
+  logo: `${siteUrl}/icon-512.png`,
+  image: `${siteUrl}/og-image.png`,
+  email: contactInfo.email,
+  telephone: contactInfo.phoneTel,
   foundingDate: '2026',
   description: 'Global software studio offering web design, custom software, app development and managed IT services.',
-  address: { '@type': 'PostalAddress', addressCountry: 'LK' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Colombo', addressCountry: 'LK' },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: contactInfo.email,
+      telephone: contactInfo.phoneTel,
+      areaServed: 'Worldwide',
+      availableLanguage: 'English',
+    },
+  ],
+  ...(realSocialLinks.length ? { sameAs: realSocialLinks } : {}),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

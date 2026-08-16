@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { servicesDetailed } from '@/lib/data';
+import { pageOpenGraph, pageTwitter } from '@/lib/seo';
+
+const TITLE = 'Web Design, Custom Software, Apps & Managed IT';
+const DESCRIPTION =
+  'Explore Nozentic\u2019s services: web design & development, custom software, app development, and managed IT (MSP) for global teams.';
 
 export const metadata: Metadata = {
-  title: 'Services — Web, Software, Apps & Managed IT',
-  description:
-    'Explore Nozentic\u2019s services: web design & development, custom software, app development, and managed IT (MSP) for global teams.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/services' },
+  openGraph: pageOpenGraph(TITLE, DESCRIPTION, '/services'),
+  twitter: pageTwitter(TITLE, DESCRIPTION),
 };
 
 export default function ServicesPage() {

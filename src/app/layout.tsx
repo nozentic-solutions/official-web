@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { contactInfo, socialLinks } from '@/lib/data';
 import { siteUrl, pageOpenGraph, pageTwitter } from '@/lib/seo';
+import { Analytics } from '@vercel/analytics/next';
 
 const grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <WhatsAppFloat />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
